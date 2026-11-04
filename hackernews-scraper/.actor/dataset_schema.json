@@ -1,0 +1,39 @@
+{
+    "$schema": "https://apify.com/schemas/v1/dataset.ide.json",
+    "actorSpecification": 1,
+    "fields": {
+        "type": "object",
+        "properties": {
+            "type": { "type": "string", "enum": ["story", "comment", "job", "poll", "pollopt", "user", "error"] },
+            "id": { "type": ["integer", "string"] },
+            "title": { "type": ["string", "null"] },
+            "url": { "type": ["string", "null"] },
+            "domain": { "type": ["string", "null"] },
+            "author": { "type": ["string", "null"] },
+            "points": { "type": ["integer", "null"] },
+            "num_comments": { "type": ["integer", "null"] },
+            "created_at": { "type": ["string", "null"] },
+            "text": { "type": ["string", "null"] },
+            "parent_id": { "type": ["integer", "null"] },
+            "story_id": { "type": ["integer", "null"] },
+            "karma": { "type": "integer" },
+            "submitted_count": { "type": "integer" },
+            "hn_url": { "type": "string" },
+            "source": { "type": "string" },
+            "error": { "type": "string" }
+        },
+        "required": ["type"]
+    },
+    "views": {
+        "stories": {
+            "title": "Stories",
+            "transformation": { "fields": ["created_at", "title", "domain", "author", "points", "num_comments", "hn_url"] },
+            "display": { "component": "table" }
+        },
+        "comments": {
+            "title": "Comments and postings",
+            "transformation": { "fields": ["created_at", "author", "text", "hn_url"] },
+            "display": { "component": "table" }
+        }
+    }
+}

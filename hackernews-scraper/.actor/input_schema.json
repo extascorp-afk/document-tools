@@ -1,0 +1,121 @@
+{
+    "title": "Hacker News Scraper",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "mode": {
+            "title": "What to collect",
+            "type": "string",
+            "description": "Story lists (front page, top, new...), keyword search, a story's full comment tree, user profiles with submissions, or the monthly 'Who is hiring' thread.",
+            "editor": "select",
+            "enum": ["list", "search", "thread", "user", "hiring"],
+            "enumTitles": ["Story lists (front page, top, new, best, ask, show, jobs)", "Search stories / comments", "Full comment tree of stories", "User profiles and submissions", "Monthly 'Who is hiring' thread"],
+            "default": "list"
+        },
+        "list": {
+            "title": "List",
+            "type": "string",
+            "description": "Mode 'list'. 'Front page' is the real front page (about 30 stories); 'Top' is the top 500.",
+            "editor": "select",
+            "enum": ["front", "top", "new", "best", "ask", "show", "jobs"],
+            "enumTitles": ["Front page", "Top", "New", "Best", "Ask HN", "Show HN", "Jobs"],
+            "default": "top"
+        },
+        "lists": {
+            "title": "Several lists (optional)",
+            "type": "array",
+            "description": "Mode 'list'. Overrides 'List': any of front, top, new, best, ask, show, jobs. Each gets its own max results.",
+            "editor": "stringList"
+        },
+        "queries": {
+            "title": "Search keywords",
+            "type": "array",
+            "description": "Mode 'search'. One search per entry. Leave empty to match only on the filters below.",
+            "editor": "stringList"
+        },
+        "searchIn": {
+            "title": "Search in",
+            "type": "string",
+            "description": "Mode 'search'. Stories, comments, or both.",
+            "editor": "select",
+            "enum": ["story", "comment", "both"],
+            "enumTitles": ["Stories", "Comments", "Stories and comments"],
+            "default": "story"
+        },
+        "sort": {
+            "title": "Search sort",
+            "type": "string",
+            "description": "Mode 'search'. Relevance returns at most 1,000 hits per keyword; newest first can go further back.",
+            "editor": "select",
+            "enum": ["relevance", "date"],
+            "enumTitles": ["Relevance", "Newest first"],
+            "default": "relevance"
+        },
+        "since": {
+            "title": "Since (search)",
+            "type": "string",
+            "description": "Mode 'search'. Only items created on or after this date, e.g. 2026-01-31 or 2026-01-31T00:00:00Z.",
+            "editor": "textfield"
+        },
+        "until": {
+            "title": "Until (search)",
+            "type": "string",
+            "description": "Mode 'search'. Only items created before this date.",
+            "editor": "textfield"
+        },
+        "minPoints": {
+            "title": "Minimum points (search)",
+            "type": "integer",
+            "description": "Mode 'search'. Only items with at least this many points.",
+            "minimum": 0
+        },
+        "minComments": {
+            "title": "Minimum comments (search)",
+            "type": "integer",
+            "description": "Mode 'search'. Only stories with at least this many comments.",
+            "minimum": 0
+        },
+        "storyIds": {
+            "title": "Story IDs or URLs",
+            "type": "array",
+            "description": "Mode 'thread'. Item IDs or news.ycombinator.com/item?id=... URLs. Returns the story and all its comments, flattened.",
+            "editor": "stringList"
+        },
+        "usernames": {
+            "title": "Usernames",
+            "type": "array",
+            "description": "Mode 'user'. HN usernames, e.g. pg.",
+            "editor": "stringList"
+        },
+        "includeSubmissions": {
+            "title": "Include submissions (users)",
+            "type": "boolean",
+            "description": "Mode 'user'. Also return the user's stories and comments, newest first.",
+            "default": true
+        },
+        "hiringThread": {
+            "title": "Hiring thread",
+            "type": "string",
+            "description": "Mode 'hiring'. Which monthly thread by 'whoishiring'.",
+            "editor": "select",
+            "enum": ["hiring", "hired", "freelancer"],
+            "enumTitles": ["Who is hiring?", "Who wants to be hired?", "Freelancer? Seeking freelancer?"],
+            "default": "hiring"
+        },
+        "hiringMonth": {
+            "title": "Month (hiring)",
+            "type": "string",
+            "description": "Mode 'hiring'. Month like 2026-11. Empty = the latest thread.",
+            "editor": "textfield"
+        },
+        "maxItems": {
+            "title": "Max results per entry",
+            "type": "integer",
+            "description": "Maximum results for each list / keyword / story / user / thread. You are charged per result.",
+            "minimum": 1,
+            "maximum": 100000,
+            "default": 20
+        }
+    },
+    "required": ["mode"]
+}

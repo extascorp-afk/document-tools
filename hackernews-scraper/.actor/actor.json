@@ -1,0 +1,21 @@
+{
+	"$schema": "https://apify.com/schemas/v1/actor.ide.json",
+	"actorSpecification": 1,
+	"name": "hackernews-scraper",
+	"title": "Hacker News Scraper - Stories, Comments, Search, Jobs",
+	"description": "Scrape Hacker News via the official Firebase and Algolia APIs: front page, top/new/best/ask/show/jobs, keyword search, comment trees, user profiles and monthly Who is hiring threads. Pay per result.",
+	"version": "1.0",
+	"buildTag": "latest",
+	"minMemoryMbytes": 128,
+	"maxMemoryMbytes": 1024,
+	"meta": {
+		"templateId": "python-start",
+		"generatedBy": "Claude Code with Claude Opus 5.5"
+	},
+	"inputSchema": "./input_schema.json",
+	"outputSchema": "./output_schema.json",
+	"storages": {
+		"dataset": "./dataset_schema.json"
+	},
+	"dockerfile": "../Dockerfile"
+}
