@@ -1,0 +1,21 @@
+{
+	"$schema": "https://apify.com/schemas/v1/actor.ide.json",
+	"actorSpecification": 1,
+	"name": "appstore-reviews-scraper",
+	"title": "Apple App Store Reviews Scraper - Any App, Any Country",
+	"description": "Get App Store reviews for any iPhone, iPad or Mac app via Apple's official customer-reviews feed. Rating, title, text, version, date, any country, app names, IDs or URLs. No login. Pay per review.",
+	"version": "1.0",
+	"buildTag": "latest",
+	"minMemoryMbytes": 128,
+	"maxMemoryMbytes": 1024,
+	"meta": {
+		"templateId": "python-start",
+		"generatedBy": "Claude Code with Claude Opus 5.5"
+	},
+	"inputSchema": "./input_schema.json",
+	"outputSchema": "./output_schema.json",
+	"storages": {
+		"dataset": "./dataset_schema.json"
+	},
+	"dockerfile": "../Dockerfile"
+}

@@ -1,0 +1,59 @@
+{
+    "title": "App Store Reviews Scraper",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "apps": {
+            "title": "Apps",
+            "type": "array",
+            "description": "App Store URLs (apps.apple.com/us/app/instagram/id389801252), numeric app IDs (389801252) or app names (Instagram). Names resolve to the best match of Apple's search.",
+            "editor": "stringList",
+            "prefill": ["389801252"]
+        },
+        "countries": {
+            "title": "Countries",
+            "type": "array",
+            "description": "Two-letter App Store country codes, e.g. us, gb, de, fr, jp. Reviews are per storefront, so add several to cover more. Empty = the country in the app URL, else us.",
+            "editor": "stringList",
+            "prefill": ["us"]
+        },
+        "sort": {
+            "title": "Sort",
+            "type": "string",
+            "description": "Newest first, or most helpful first.",
+            "editor": "select",
+            "enum": ["mostrecent", "mosthelpful"],
+            "enumTitles": ["Newest first", "Most helpful first"],
+            "default": "mostrecent"
+        },
+        "maxReviews": {
+            "title": "Max reviews per app and country",
+            "type": "integer",
+            "description": "Apple's feed exposes at most 500 reviews per app and country (10 pages of 50). You are charged per review.",
+            "minimum": 1,
+            "maximum": 500,
+            "default": 20
+        },
+        "minRating": {
+            "title": "Minimum rating",
+            "type": "integer",
+            "description": "Keep only reviews with at least this many stars (1-5).",
+            "minimum": 1,
+            "maximum": 5
+        },
+        "maxRating": {
+            "title": "Maximum rating",
+            "type": "integer",
+            "description": "Keep only reviews with at most this many stars. Use 1-2 to find complaints.",
+            "minimum": 1,
+            "maximum": 5
+        },
+        "since": {
+            "title": "Since",
+            "type": "string",
+            "description": "Only reviews on or after this date, e.g. 2026-01-31. With newest-first sorting the scan stops as soon as older reviews appear.",
+            "editor": "textfield"
+        }
+    },
+    "required": ["apps"]
+}

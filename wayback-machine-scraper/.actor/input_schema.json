@@ -1,0 +1,80 @@
+{
+    "title": "Wayback Machine Scraper",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "mode": {
+            "title": "What to collect",
+            "type": "string",
+            "description": "Snapshots of a page over time, the closest snapshot to a given date, or every unique URL the archive knows for a site.",
+            "editor": "select",
+            "enum": ["snapshots", "closest", "urls"],
+            "enumTitles": ["Snapshots over time", "Closest snapshot to a date", "All archived URLs of a site"],
+            "default": "snapshots"
+        },
+        "urls": {
+            "title": "URLs or domains",
+            "type": "array",
+            "description": "A page URL (example.com/pricing) or a domain (example.com). Use 'Match' to include subpaths or subdomains.",
+            "editor": "stringList",
+            "prefill": ["example.com"]
+        },
+        "matchType": {
+            "title": "Match",
+            "type": "string",
+            "description": "Exact URL, everything under a path prefix, a whole host, or a domain with all subdomains. Defaults: exact for snapshots, domain for 'All archived URLs'.",
+            "editor": "select",
+            "enum": ["exact", "prefix", "host", "domain"],
+            "enumTitles": ["Exact URL", "Path prefix", "Whole host", "Domain and subdomains"]
+        },
+        "from": {
+            "title": "From",
+            "type": "string",
+            "description": "Earliest capture: 2020, 2020-06 or 2020-06-15.",
+            "editor": "textfield"
+        },
+        "to": {
+            "title": "To",
+            "type": "string",
+            "description": "Latest capture: 2024, 2024-06 or 2024-06-15.",
+            "editor": "textfield"
+        },
+        "closestTo": {
+            "title": "Closest to (mode: closest)",
+            "type": "string",
+            "description": "Date to approach, e.g. 2020-06-15. Returns the nearest capture for each URL.",
+            "editor": "textfield"
+        },
+        "collapse": {
+            "title": "One snapshot per (mode: snapshots)",
+            "type": "string",
+            "description": "Thin out the timeline: keep one snapshot per hour, day, month or year, or only snapshots whose content changed.",
+            "editor": "select",
+            "enum": ["none", "hour", "day", "month", "year", "digest"],
+            "enumTitles": ["Keep all", "Hour", "Day", "Month", "Year", "Content change only"],
+            "default": "none"
+        },
+        "statusFilter": {
+            "title": "HTTP status",
+            "type": "string",
+            "description": "Only captures with this status code (200, 301, 404...). Type 'any' to keep everything.",
+            "editor": "textfield",
+            "default": "200"
+        },
+        "mimeType": {
+            "title": "MIME type",
+            "type": "string",
+            "description": "Optional filter, e.g. text/html, application/pdf, image/png.",
+            "editor": "textfield"
+        },
+        "maxItems": {
+            "title": "Max results per URL",
+            "type": "integer",
+            "description": "Maximum snapshots (or URLs) for each entry. You are charged per result.",
+            "minimum": 1,
+            "maximum": 1000000,
+            "default": 20
+        }
+    },
+    "required": ["urls"]
+}

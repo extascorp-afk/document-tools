@@ -1,0 +1,29 @@
+{
+    "$schema": "https://apify.com/schemas/v1/dataset.ide.json",
+    "actorSpecification": 1,
+    "fields": {
+        "type": "object",
+        "properties": {
+            "type": { "type": "string", "enum": ["snapshot", "error"] },
+            "url": { "type": "string" },
+            "timestamp": { "type": "string" },
+            "date": { "type": "string" },
+            "statusCode": { "type": ["integer", "null"] },
+            "mimeType": { "type": ["string", "null"] },
+            "digest": { "type": "string" },
+            "length": { "type": ["integer", "null"] },
+            "archiveUrl": { "type": "string" },
+            "rawUrl": { "type": "string" },
+            "source": { "type": "string" },
+            "error": { "type": "string" }
+        },
+        "required": ["type"]
+    },
+    "views": {
+        "snapshots": {
+            "title": "Snapshots",
+            "transformation": { "fields": ["date", "url", "statusCode", "mimeType", "archiveUrl"] },
+            "display": { "component": "table" }
+        }
+    }
+}

@@ -1,0 +1,21 @@
+{
+	"$schema": "https://apify.com/schemas/v1/actor.ide.json",
+	"actorSpecification": 1,
+	"name": "wayback-machine-scraper",
+	"title": "Wayback Machine Scraper - Archived Snapshots & URLs",
+	"description": "List archived snapshots and every known URL of any website from the Internet Archive's official CDX API. Date ranges, status and type filters, closest snapshot to a date, direct archive links. No login. Pay per snapshot.",
+	"version": "1.0",
+	"buildTag": "latest",
+	"minMemoryMbytes": 128,
+	"maxMemoryMbytes": 1024,
+	"meta": {
+		"templateId": "python-start",
+		"generatedBy": "Claude Code with Claude Opus 5.5"
+	},
+	"inputSchema": "./input_schema.json",
+	"outputSchema": "./output_schema.json",
+	"storages": {
+		"dataset": "./dataset_schema.json"
+	},
+	"dockerfile": "../Dockerfile"
+}
