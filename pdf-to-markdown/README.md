@@ -83,3 +83,7 @@ Found a PDF that converts badly? Open an issue on the Actor's Issues tab with th
 
 - [Bulk Image OCR](https://apify.com/extas_corp/image-ocr): text from screenshots, scans and photos
 - [Word, PowerPoint & Excel to Markdown](https://apify.com/extas_corp/document-to-markdown): DOCX, PPTX, XLSX, HTML, EPUB to Markdown
+
+## Free browser version
+
+Converting just one file? Use the free in-browser converter at [hackthehydra.com](https://hackthehydra.com): no upload, no account.

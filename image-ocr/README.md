@@ -49,3 +49,7 @@ For PDF files (text PDFs and scanned PDFs, with tables), use the companion Actor
 - Max 30 MB per image, 2 minutes per image.
 - Handwriting is read poorly (Tesseract is built for printed text).
 - Very low-resolution images (under ~20 px text height) give low confidence. Check `meanConfidence`.
+
+## Free browser version
+
+Converting just one file? Use the free in-browser converter at [hackthehydra.com](https://hackthehydra.com): no upload, no account.

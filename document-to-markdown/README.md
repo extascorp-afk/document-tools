@@ -52,3 +52,7 @@ Powered by Microsoft's open-source [MarkItDown](https://github.com/microsoft/mar
 - Max 50 MB per file, 3 minutes per file.
 - Old binary formats (.doc, .ppt) aren't supported. Save them as .docx / .pptx.
 - Some websites block automated downloads (HTTP 403). Those items fail and aren't charged.
+
+## Free browser version
+
+Converting just one file? Use the free in-browser converter at [hackthehydra.com](https://hackthehydra.com): no upload, no account.

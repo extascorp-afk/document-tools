@@ -1,5 +1,7 @@
 # Document tools for AI pipelines
 
+Try them free in your browser at **[hackthehydra.com](https://hackthehydra.com)**.
+
 Small open-source converters that turn documents into clean, LLM-ready Markdown. Each one is also available as a hosted, pay-per-use API on Apify, so you can use it without installing anything:
 
 | Tool | What it does | Hosted version |
