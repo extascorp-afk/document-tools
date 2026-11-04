@@ -2,6 +2,7 @@
 
 Convert PDF files to **clean, LLM-ready Markdown**: headings, paragraphs, Markdown tables, and OCR for scanned pages. Built for **RAG pipelines, AI agents, document search and data extraction**.
 
+- **Two-column papers read in the right order** (left column, then right)
 - **Headings detected** from font sizes (`#`, `##`, `###`), paragraphs re-joined, hyphenated words fixed
 - **Tables** converted to real Markdown tables (layout boxes are ignored)
 - **Scanned PDFs**: pages without a text layer are OCR'd with Tesseract (English, French, German, Spanish, Italian, Portuguese, Dutch)
@@ -69,7 +70,7 @@ curl -X POST "https://api.apify.com/v2/acts/<ACTOR_ID>/run-sync-get-dataset-item
 - Max 100 MB per PDF, 5 minutes per PDF.
 - Password-protected PDFs aren't supported.
 - Complex multi-level tables (e.g. tax tables with merged cells) may come out simplified. Tables drawn without lines are kept as text.
-- Two-column layouts are read line by line across the page.
+- Two-column layouts (papers, journals) are detected and read column by column; full-width titles and figures stay in place.
 
 ## FAQ
 
