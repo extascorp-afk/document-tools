@@ -1,0 +1,44 @@
+{
+    "$schema": "https://apify.com/schemas/v1/dataset.ide.json",
+    "actorSpecification": 1,
+    "fields": {
+        "type": "object",
+        "properties": {
+            "url": { "type": "string" },
+            "status": { "type": "string", "enum": ["ok", "error"] },
+            "markdown": { "type": "string" },
+            "pageCount": { "type": "integer" },
+            "pagesProcessed": { "type": "integer" },
+            "ocrPages": { "type": "integer" },
+            "tableCount": { "type": "integer" },
+            "charCount": { "type": "integer" },
+            "title": { "type": ["string", "null"] },
+            "author": { "type": ["string", "null"] },
+            "metadata": { "type": "object" },
+            "error": { "type": "string" }
+        },
+        "required": ["url", "status"]
+    },
+    "views": {
+        "overview": {
+            "title": "Overview",
+            "transformation": {
+                "fields": ["url", "status", "title", "pageCount", "ocrPages", "tableCount", "charCount", "markdown", "error"]
+            },
+            "display": {
+                "component": "table",
+                "properties": {
+                    "url": { "label": "PDF", "format": "link" },
+                    "status": { "label": "Status", "format": "text" },
+                    "title": { "label": "Title", "format": "text" },
+                    "pageCount": { "label": "Pages", "format": "number" },
+                    "ocrPages": { "label": "OCR pages", "format": "number" },
+                    "tableCount": { "label": "Tables", "format": "number" },
+                    "charCount": { "label": "Characters", "format": "number" },
+                    "markdown": { "label": "Markdown", "format": "text" },
+                    "error": { "label": "Error", "format": "text" }
+                }
+            }
+        }
+    }
+}

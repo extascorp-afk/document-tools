@@ -1,0 +1,21 @@
+{
+	"$schema": "https://apify.com/schemas/v1/actor.ide.json",
+	"actorSpecification": 1,
+	"name": "pdf-to-markdown",
+	"title": "PDF to Markdown Converter (Tables + OCR)",
+	"description": "Convert PDF files to clean Markdown for LLMs, RAG and data pipelines. Keeps headings, paragraphs and tables, and OCRs scanned pages. Pay only for PDFs that convert.",
+	"version": "1.0",
+	"buildTag": "latest",
+	"minMemoryMbytes": 512,
+	"maxMemoryMbytes": 4096,
+	"meta": {
+		"templateId": "python-start",
+		"generatedBy": "Claude Code with Claude Opus 5.5"
+	},
+	"inputSchema": "./input_schema.json",
+	"outputSchema": "./output_schema.json",
+	"storages": {
+		"dataset": "./dataset_schema.json"
+	},
+	"dockerfile": "../Dockerfile"
+}

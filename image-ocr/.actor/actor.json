@@ -1,0 +1,21 @@
+{
+	"$schema": "https://apify.com/schemas/v1/actor.ide.json",
+	"actorSpecification": 1,
+	"name": "image-ocr",
+	"title": "Bulk Image OCR - Image to Text (Tesseract)",
+	"description": "Extract text from images in bulk: screenshots, scans, photos, receipts. Returns full text, confidence, and optional word bounding boxes. 7 languages. Pay only for images that are read.",
+	"version": "1.0",
+	"buildTag": "latest",
+	"minMemoryMbytes": 512,
+	"maxMemoryMbytes": 4096,
+	"meta": {
+		"templateId": "python-start",
+		"generatedBy": "Claude Code with Claude Opus 5.5"
+	},
+	"inputSchema": "./input_schema.json",
+	"outputSchema": "./output_schema.json",
+	"storages": {
+		"dataset": "./dataset_schema.json"
+	},
+	"dockerfile": "../Dockerfile"
+}

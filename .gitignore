@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+storage/
+*.pyc
+AGENTS.md
+CLAUDE.md

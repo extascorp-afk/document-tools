@@ -1,0 +1,50 @@
+{
+    "title": "PDF to Markdown",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "pdfUrls": {
+            "title": "PDF URLs",
+            "type": "array",
+            "description": "Direct links to PDF files. Each PDF becomes one dataset item with its Markdown.",
+            "editor": "requestListSources",
+            "prefill": [{ "url": "https://arxiv.org/pdf/1706.03762" }]
+        },
+        "extractTables": {
+            "title": "Convert tables to Markdown tables",
+            "type": "boolean",
+            "description": "Detect ruled tables and output them as Markdown tables instead of loose text.",
+            "default": true
+        },
+        "ocrScannedPages": {
+            "title": "OCR scanned pages",
+            "type": "boolean",
+            "description": "Run OCR (Tesseract) on pages that have no text layer, such as scans. Charged per OCR page.",
+            "default": true
+        },
+        "ocrLanguage": {
+            "title": "OCR language",
+            "type": "string",
+            "description": "Tesseract language code(s), e.g. eng, fra, deu, spa, ita, por, nld, or several joined with + (eng+fra).",
+            "editor": "select",
+            "enum": ["eng", "fra", "deu", "spa", "ita", "por", "nld", "eng+fra", "eng+deu", "eng+spa"],
+            "default": "eng"
+        },
+        "maxPages": {
+            "title": "Max pages per PDF",
+            "type": "integer",
+            "description": "Only convert the first N pages of each PDF. 0 = all pages.",
+            "minimum": 0,
+            "default": 0
+        },
+        "maxConcurrency": {
+            "title": "Max concurrency",
+            "type": "integer",
+            "description": "How many PDFs to download and convert in parallel.",
+            "minimum": 1,
+            "maximum": 16,
+            "default": 4
+        }
+    },
+    "required": ["pdfUrls"]
+}

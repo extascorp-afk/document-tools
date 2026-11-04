@@ -1,0 +1,35 @@
+{
+    "$schema": "https://apify.com/schemas/v1/dataset.ide.json",
+    "actorSpecification": 1,
+    "fields": {
+        "type": "object",
+        "properties": {
+            "url": { "type": "string" },
+            "status": { "type": "string", "enum": ["ok", "error"] },
+            "fileType": { "type": ["string", "null"] },
+            "title": { "type": ["string", "null"] },
+            "markdown": { "type": "string" },
+            "charCount": { "type": "integer" },
+            "error": { "type": "string" }
+        },
+        "required": ["url", "status"]
+    },
+    "views": {
+        "overview": {
+            "title": "Overview",
+            "transformation": { "fields": ["url", "status", "fileType", "title", "charCount", "markdown", "error"] },
+            "display": {
+                "component": "table",
+                "properties": {
+                    "url": { "label": "File", "format": "link" },
+                    "status": { "label": "Status", "format": "text" },
+                    "fileType": { "label": "Type", "format": "text" },
+                    "title": { "label": "Title", "format": "text" },
+                    "charCount": { "label": "Characters", "format": "number" },
+                    "markdown": { "label": "Markdown", "format": "text" },
+                    "error": { "label": "Error", "format": "text" }
+                }
+            }
+        }
+    }
+}

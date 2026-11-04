@@ -1,0 +1,46 @@
+{
+    "title": "Bulk Image OCR",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "imageUrls": {
+            "title": "Image URLs",
+            "type": "array",
+            "description": "Direct links to images (PNG, JPEG, WebP, TIFF, BMP, GIF). Each image becomes one dataset item.",
+            "editor": "requestListSources",
+            "prefill": [{ "url": "https://raw.githubusercontent.com/tesseract-ocr/tessdoc/main/images/eurotext.png" }]
+        },
+        "language": {
+            "title": "Language",
+            "type": "string",
+            "description": "Text language. Combine with + for mixed text (eng+fra).",
+            "editor": "select",
+            "enum": ["eng", "fra", "deu", "spa", "ita", "por", "nld", "eng+fra", "eng+deu", "eng+spa"],
+            "default": "eng"
+        },
+        "includeWordBoxes": {
+            "title": "Include word bounding boxes",
+            "type": "boolean",
+            "description": "Add every word with its confidence and pixel position (left, top, width, height).",
+            "default": false
+        },
+        "pageSegmentationMode": {
+            "title": "Layout mode",
+            "type": "string",
+            "description": "Tesseract page segmentation mode: 3 = automatic (documents), 6 = single block of text, 11 = sparse text (signs, screenshots, UI).",
+            "editor": "select",
+            "enum": ["3", "4", "6", "11"],
+            "enumTitles": ["Automatic (documents)", "Single column", "Single block of text", "Sparse text (screenshots, signs)"],
+            "default": "3"
+        },
+        "maxConcurrency": {
+            "title": "Max concurrency",
+            "type": "integer",
+            "description": "How many images to process in parallel.",
+            "minimum": 1,
+            "maximum": 16,
+            "default": 4
+        }
+    },
+    "required": ["imageUrls"]
+}

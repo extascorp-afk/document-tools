@@ -1,0 +1,36 @@
+{
+    "$schema": "https://apify.com/schemas/v1/dataset.ide.json",
+    "actorSpecification": 1,
+    "fields": {
+        "type": "object",
+        "properties": {
+            "url": { "type": "string" },
+            "status": { "type": "string", "enum": ["ok", "error"] },
+            "text": { "type": "string" },
+            "meanConfidence": { "type": "number" },
+            "wordCount": { "type": "integer" },
+            "imageWidth": { "type": "integer" },
+            "imageHeight": { "type": "integer" },
+            "words": { "type": "array" },
+            "error": { "type": "string" }
+        },
+        "required": ["url", "status"]
+    },
+    "views": {
+        "overview": {
+            "title": "Overview",
+            "transformation": { "fields": ["url", "status", "text", "meanConfidence", "wordCount", "error"] },
+            "display": {
+                "component": "table",
+                "properties": {
+                    "url": { "label": "Image", "format": "image" },
+                    "status": { "label": "Status", "format": "text" },
+                    "text": { "label": "Text", "format": "text" },
+                    "meanConfidence": { "label": "Confidence", "format": "number" },
+                    "wordCount": { "label": "Words", "format": "number" },
+                    "error": { "label": "Error", "format": "text" }
+                }
+            }
+        }
+    }
+}

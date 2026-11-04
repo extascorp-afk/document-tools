@@ -1,0 +1,21 @@
+{
+	"$schema": "https://apify.com/schemas/v1/actor.ide.json",
+	"actorSpecification": 1,
+	"name": "document-to-markdown",
+	"title": "Word, PowerPoint & Excel to Markdown (DOCX, PPTX, XLSX)",
+	"description": "Convert Office documents and web formats to clean Markdown for LLMs and RAG: DOCX, PPTX, XLSX, XLS, HTML, EPUB, CSV, JSON, XML, Outlook MSG. Bulk, by URL. Pay only for files that convert.",
+	"version": "1.0",
+	"buildTag": "latest",
+	"minMemoryMbytes": 512,
+	"maxMemoryMbytes": 4096,
+	"meta": {
+		"templateId": "python-start",
+		"generatedBy": "Claude Code with Claude Opus 5.5"
+	},
+	"inputSchema": "./input_schema.json",
+	"outputSchema": "./output_schema.json",
+	"storages": {
+		"dataset": "./dataset_schema.json"
+	},
+	"dockerfile": "../Dockerfile"
+}

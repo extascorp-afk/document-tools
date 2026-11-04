@@ -1,0 +1,23 @@
+{
+    "title": "Document to Markdown",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "documentUrls": {
+            "title": "Document URLs",
+            "type": "array",
+            "description": "Direct links to DOCX, PPTX, XLSX, XLS, HTML, EPUB, CSV, JSON, XML, MSG, IPYNB or ZIP files. Each file becomes one dataset item.",
+            "editor": "requestListSources",
+            "prefill": [{ "url": "https://filesamples.com/samples/document/docx/sample3.docx" }]
+        },
+        "maxConcurrency": {
+            "title": "Max concurrency",
+            "type": "integer",
+            "description": "How many files to download and convert in parallel.",
+            "minimum": 1,
+            "maximum": 16,
+            "default": 4
+        }
+    },
+    "required": ["documentUrls"]
+}
