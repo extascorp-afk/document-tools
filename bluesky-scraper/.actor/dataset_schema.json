@@ -1,0 +1,41 @@
+{
+    "$schema": "https://apify.com/schemas/v1/dataset.ide.json",
+    "actorSpecification": 1,
+    "fields": {
+        "type": "object",
+        "properties": {
+            "type": { "type": "string", "enum": ["post", "profile", "error"] },
+            "source": { "type": "string" },
+            "uri": { "type": "string" },
+            "url": { "type": "string" },
+            "text": { "type": "string" },
+            "createdAt": { "type": "string" },
+            "authorHandle": { "type": "string" },
+            "did": { "type": "string" },
+            "handle": { "type": "string" },
+            "displayName": { "type": "string" },
+            "description": { "type": "string" },
+            "followersCount": { "type": "integer" },
+            "followsCount": { "type": "integer" },
+            "postsCount": { "type": "integer" },
+            "likeCount": { "type": "integer" },
+            "repostCount": { "type": "integer" },
+            "replyCount": { "type": "integer" },
+            "quoteCount": { "type": "integer" },
+            "error": { "type": "string" }
+        },
+        "required": ["type"]
+    },
+    "views": {
+        "posts": {
+            "title": "Posts",
+            "transformation": { "fields": ["createdAt", "authorHandle", "text", "likeCount", "repostCount", "replyCount", "url"] },
+            "display": { "component": "table" }
+        },
+        "profiles": {
+            "title": "Profiles",
+            "transformation": { "fields": ["handle", "displayName", "description", "followersCount", "followsCount", "postsCount"] },
+            "display": { "component": "table" }
+        }
+    }
+}

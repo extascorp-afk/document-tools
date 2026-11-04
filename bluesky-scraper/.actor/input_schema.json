@@ -1,0 +1,90 @@
+{
+    "title": "Bluesky Scraper",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "mode": {
+            "title": "What to collect",
+            "type": "string",
+            "description": "Search posts by keyword, posts of given accounts, account profiles, followers, following, or a post's reply thread.",
+            "editor": "select",
+            "enum": ["search", "authorFeed", "profiles", "followers", "following", "thread"],
+            "enumTitles": ["Search posts by keyword", "Posts of accounts", "Profiles", "Followers of accounts", "Accounts followed by accounts", "Post thread and replies"],
+            "default": "search"
+        },
+        "queries": {
+            "title": "Search keywords",
+            "type": "array",
+            "description": "Mode 'search'. Keywords, phrases, #hashtags, from:handle, mentions:handle, domain:example.com (Bluesky search syntax). One search per entry.",
+            "editor": "stringList",
+            "prefill": ["apify"]
+        },
+        "handles": {
+            "title": "Handles",
+            "type": "array",
+            "description": "Modes 'authorFeed', 'profiles', 'followers', 'following'. Handles like bsky.app, profile URLs, or DIDs.",
+            "editor": "stringList"
+        },
+        "postUrls": {
+            "title": "Post URLs",
+            "type": "array",
+            "description": "Mode 'thread'. bsky.app post URLs or at:// URIs.",
+            "editor": "stringList"
+        },
+        "maxItems": {
+            "title": "Max results per entry",
+            "type": "integer",
+            "description": "Maximum results collected for each keyword / handle / post URL. You are charged per result.",
+            "minimum": 1,
+            "maximum": 100000,
+            "default": 50
+        },
+        "sort": {
+            "title": "Search sort",
+            "type": "string",
+            "description": "Mode 'search' only.",
+            "editor": "select",
+            "enum": ["latest", "top"],
+            "enumTitles": ["Latest", "Top"],
+            "default": "latest"
+        },
+        "since": {
+            "title": "Since (search)",
+            "type": "string",
+            "description": "Mode 'search' only. Only posts after this date, e.g. 2026-01-31 or 2026-01-31T00:00:00Z.",
+            "editor": "textfield"
+        },
+        "until": {
+            "title": "Until (search)",
+            "type": "string",
+            "description": "Mode 'search' only. Only posts before this date.",
+            "editor": "textfield"
+        },
+        "language": {
+            "title": "Language (search)",
+            "type": "string",
+            "description": "Mode 'search' only. Two-letter code, e.g. en, de, ja.",
+            "editor": "textfield"
+        },
+        "includeReplies": {
+            "title": "Include replies (accounts' posts)",
+            "type": "boolean",
+            "description": "Mode 'authorFeed' only. Off = original posts, reposts and quotes only.",
+            "default": true
+        },
+        "identifier": {
+            "title": "Bluesky handle (optional)",
+            "type": "string",
+            "description": "Optional. Login is NOT needed for normal runs. Provide with an app password only if public search is blocked for you.",
+            "editor": "textfield"
+        },
+        "appPassword": {
+            "title": "App password (optional)",
+            "type": "string",
+            "description": "Create one at bsky.app > Settings > Privacy and security > App passwords. Never use your main password.",
+            "editor": "textfield",
+            "isSecret": true
+        }
+    },
+    "required": ["mode"]
+}
