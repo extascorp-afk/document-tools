@@ -128,6 +128,53 @@ def _page_blocks(page: Any, body_size: float, with_tables: bool) -> tuple[list[t
     return blocks, len(bboxes)
 
 
+def column_split(page: Any) -> float | None:
+    """Return the x of the gutter if the page body is laid out in two columns, else None."""
+    words = page.extract_words()
+    if len(words) < 80:
+        return None
+    w = float(page.width)
+    # Ignore full-width lines (titles, abstracts) when looking for the gutter.
+    narrow = [x for x in words if (x['x1'] - x['x0']) < w * 0.4]
+    best_x, best_cross = None, None
+    for i in range(35, 66):
+        x = w * i / 100
+        cross = sum(1 for wd in narrow if wd['x0'] < x < wd['x1'])
+        if best_cross is None or cross < best_cross:
+            best_x, best_cross = x, cross
+    left = sum(1 for wd in narrow if wd['x1'] <= best_x)
+    right = sum(1 for wd in narrow if wd['x0'] >= best_x)
+    # A real gutter: few words cross it (titles, figure labels), and both sides hold a good share of the text.
+    if best_cross <= len(narrow) * 0.05 and min(left, right) >= len(narrow) * 0.3:
+        return best_x
+    return None
+
+
+def column_regions(page: Any, gutter: float) -> list[tuple[float, float, float, float]]:
+    """Split a two-column page into crop boxes in reading order.
+
+    Horizontal bands containing words that cross the gutter (titles, full-width figures) are read
+    full width; the bands between them are read left column first, then right column.
+    """
+    h, w = float(page.height), float(page.width)
+    spans = sorted((wd['top'] - 2, wd['bottom'] + 2) for wd in page.extract_words() if wd['x0'] < gutter < wd['x1'])
+    merged: list[list[float]] = []
+    for top, bottom in spans:
+        if merged and top <= merged[-1][1]:
+            merged[-1][1] = max(merged[-1][1], bottom)
+        else:
+            merged.append([top, bottom])
+    boxes, y = [], 0.0
+    for top, bottom in merged + [[h, h]]:
+        top, bottom = max(top, 0.0), min(bottom, h)
+        if top - y > 1:
+            boxes += [(0, y, gutter, top), (gutter, y, w, top)]
+        if bottom - top > 0:
+            boxes.append((0, top, w, bottom))
+        y = max(y, bottom)
+    return boxes
+
+
 def pdf_to_markdown(
     data: bytes,
     *,
@@ -150,7 +197,16 @@ def pdf_to_markdown(
                 if text:
                     parts.append(text)
                 continue
-            blocks, n = _page_blocks(page, body, with_tables)
+            split = column_split(page)
+            if split:
+                # Two-column layout: full-width bands as is, column bands left then right.
+                blocks, n = [], 0
+                for box in column_regions(page, split):
+                    b, k = _page_blocks(page.within_bbox(box), body, with_tables)  # within_bbox: no duplicated chars at band edges
+                    blocks += b
+                    n += k
+            else:
+                blocks, n = _page_blocks(page, body, with_tables)
             tables += n
             if blocks:
                 parts.append('\n\n'.join(b[1] for b in blocks))
