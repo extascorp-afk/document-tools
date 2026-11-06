@@ -35,3 +35,50 @@ Download **App Store reviews** for any iPhone, iPad or Mac app from **Apple's of
 | Review | $0.0002 |
 
 Data comes from Apple's public feeds. Reviews contain public display names; please respect applicable privacy law when using them.
+
+## Example output
+
+```json
+{
+  "type": "review",
+  "appId": "570060128",
+  "appName": "Duolingo",
+  "country": "de",
+  "rating": 2,
+  "title": "I don't need chests and tiles",
+  "text": "Please add option to skip chests opening ...",
+  "version": "7.147.0",
+  "author": "fijveu",
+  "date": "2026-11-03T06:44:13Z",
+  "helpfulVotes": 0
+}
+```
+
+## Use cases
+
+- **Product research**: find recurring complaints with `maxRating: 2`.
+- **LLM analysis**: feed reviews to a model for sentiment and feature requests.
+- **Competitor tracking**: schedule runs per country and compare ratings over time.
+
+## Integrations
+
+Python (Apify client):
+
+```python
+from apify_client import ApifyClient
+
+client = ApifyClient("<APIFY_TOKEN>")
+run = client.actor("extas_corp/appstore-reviews-scraper").call(run_input={"apps": ["389801252"], "countries": ["us"], "maxReviews": 50})
+for item in client.dataset(run["defaultDatasetId"]).iterate_items():
+    print(item["rating"], item["text"])
+```
+
+**Make, Zapier, n8n**: add the Apify app, choose *Run Actor* (or *Run Actor and get dataset items*), set the Actor to `extas_corp/appstore-reviews-scraper` and map the JSON input. The same Actor can be started on a schedule from Apify itself, with a webhook to your own endpoint when the run finishes.
+
+## FAQ
+
+**Where do the reviews come from?** The public Apple customer-review feed per storefront; no login needed.
+
+**Android too?** Yes, see Google Play Reviews Scraper.
+
+**Do I need to pay to try it?** New Apify accounts include free monthly platform credit (about $5 on the free plan at the time of writing), so you can run the example input above and many more items before paying anything. You only pay the per-event price listed under Pricing; runs that return nothing or fail are not charged for the failed items.

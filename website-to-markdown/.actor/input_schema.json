@@ -48,7 +48,8 @@
             "title": "Exclude URL patterns",
             "type": "array",
             "description": "Skip URLs matching these glob patterns, e.g. *login* or */tag/*.",
-            "editor": "stringList"
+            "editor": "stringList",
+            "prefill": ["*changelog*"]
         },
         "keepLinks": {
             "title": "Keep hyperlinks in Markdown",

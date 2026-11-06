@@ -43,3 +43,52 @@ curl -X POST "https://api.apify.com/v2/acts/extas_corp~google-play-reviews-scrap
 | Review | $0.0004 |
 
 Reviews contain public display names; please respect applicable privacy law when using them.
+
+## Example output
+
+```json
+{
+  "type": "review",
+  "appId": "com.spotify.tv.android",
+  "appName": "Spotify: Music & Podcasts",
+  "appRating": 3.9,
+  "country": "us",
+  "language": "en",
+  "rating": 2,
+  "text": "That's a nice app, but ...",
+  "version": "1.95.13",
+  "author": "ahmed hamid",
+  "date": "2026-11-02T17:14:41Z",
+  "thumbsUp": 0,
+  "developerReply": null
+}
+```
+
+## Use cases
+
+- **Product research**: read what users complain about (use `maxRating: 2`) in your app or a competitor's.
+- **LLM analysis**: send reviews to a model for topic and sentiment clustering.
+- **Monitoring**: schedule a daily run with `since` to catch new reviews and developer replies.
+
+## Integrations
+
+Python (Apify client):
+
+```python
+from apify_client import ApifyClient
+
+client = ApifyClient("<APIFY_TOKEN>")
+run = client.actor("extas_corp/google-play-reviews-scraper").call(run_input={"apps": ["com.duolingo"], "countries": ["us"], "maxReviews": 50})
+for item in client.dataset(run["defaultDatasetId"]).iterate_items():
+    print(item["rating"], item["text"])
+```
+
+**Make, Zapier, n8n**: add the Apify app, choose *Run Actor* (or *Run Actor and get dataset items*), set the Actor to `extas_corp/google-play-reviews-scraper` and map the JSON input. The same Actor can be started on a schedule from Apify itself, with a webhook to your own endpoint when the run finishes.
+
+## FAQ
+
+**Why did my app name resolve to a different app?** Play search often hides the featured app ID. Pass the package name (e.g. `com.spotify.music`) or the Play URL for an exact match; the log warns when this happens.
+
+**How many reviews can I get?** Google decides the depth. Big apps allow thousands per country and language.
+
+**Do I need to pay to try it?** New Apify accounts include free monthly platform credit (about $5 on the free plan at the time of writing), so you can run the example input above and many more items before paying anything. You only pay the per-event price listed under Pricing; runs that return nothing or fail are not charged for the failed items.

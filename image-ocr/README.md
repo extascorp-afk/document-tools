@@ -1,4 +1,4 @@
-# Bulk Image OCR: Image to Text
+# Image to Text OCR: Bulk Screenshot & Scan Reader
 
 Extract text from **thousands of images** in one run: screenshots, scanned documents, photos of pages, receipts, signs, memes, UI captures. Powered by Tesseract OCR, running inside your Apify run, so your images are never sent to a third-party OCR API.
 
@@ -15,6 +15,16 @@ Extract text from **thousands of images** in one run: screenshots, scanned docum
 1. Paste image links into **Image URLs** (or upload a text file with one URL per line).
 2. Choose the language. Pick **Sparse text** for screenshots and signs.
 3. Click **Start**, then export the results as JSON, CSV or Excel, or fetch them through the API.
+
+## Input example
+
+```json
+{
+  "imageUrls": [{ "url": "https://example.com/scan.png" }],
+  "language": "eng",
+  "includeWordBoxes": false
+}
+```
 
 ## Output example
 
@@ -53,3 +63,37 @@ For PDF files (text PDFs and scanned PDFs, with tables), use the companion Actor
 ## Free browser version
 
 Converting just one file? Use the free in-browser converter at [hackthehydra.com](https://hackthehydra.com): no upload, no account.
+
+## More ways to use it
+
+- **REST API without an Apify account:** the same converters are available on RapidAPI as the [Document to Markdown API](https://rapidapi.com/ExtasCorporation/api/document-to-markdown) (PDF, DOCX, PPTX, XLSX, images; free plan included).
+- **Free in your browser:** [hackthehydra.com](https://hackthehydra.com) has no-upload converters for PDF, Word, Excel, PowerPoint and images.
+
+## Use cases
+
+- **Research and archives**: digitise scans, screenshots and photographed documents in bulk.
+- **LLM pipelines**: feed text from images into RAG or classification steps.
+- **Ops**: read receipts, labels and slides at scale instead of retyping them.
+
+## Integrations
+
+Python (Apify client):
+
+```python
+from apify_client import ApifyClient
+
+client = ApifyClient("<APIFY_TOKEN>")
+run = client.actor("extas_corp/image-ocr").call(run_input={"imageUrls": [{"url": "https://raw.githubusercontent.com/tesseract-ocr/tessdoc/main/images/eurotext.png"}]})
+for item in client.dataset(run["defaultDatasetId"]).iterate_items():
+    print(item.get("text"))
+```
+
+**Make, Zapier, n8n**: add the Apify app, choose *Run Actor* (or *Run Actor and get dataset items*), set the Actor to `extas_corp/image-ocr` and map the JSON input. The same Actor can be started on a schedule from Apify itself, with a webhook to your own endpoint when the run finishes.
+
+## FAQ
+
+**Which languages?** Any Tesseract language code, set with the `language` input (default `eng`).
+
+**How accurate is it?** Good on clean, high-resolution images; low-resolution or handwritten input gives weaker results.
+
+**Do I need to pay to try it?** New Apify accounts include free monthly platform credit (about $5 on the free plan at the time of writing), so you can run the example input above and many more items before paying anything. You only pay the per-event price listed under Pricing; runs that return nothing or fail are not charged for the failed items.

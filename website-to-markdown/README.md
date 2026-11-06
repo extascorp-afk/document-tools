@@ -52,3 +52,46 @@ Works with LangChain, LlamaIndex, n8n, Make and the Apify MCP server.
 
 - Only crawl content you are allowed to process. The Actor respects robots.txt, but you remain responsible for the site's terms and for copyright.
 - Need PDFs, Word, Excel or PowerPoint instead of web pages? See [PDF to Markdown](https://apify.com/extas_corp/pdf-to-markdown) and [Document to Markdown](https://apify.com/extas_corp/document-to-markdown). Free browser tools: [hackthehydra.com](https://hackthehydra.com).
+
+## Use cases
+
+- **LLM and RAG**: index a whole documentation site or knowledge base as clean Markdown.
+- **SEO and content audits**: pull titles, descriptions and body text of every page, filtered by URL pattern.
+- **Research**: archive blogs, wikis or news sections in a readable, diffable format.
+
+## Integrations
+
+Python (Apify client):
+
+```python
+from apify_client import ApifyClient
+
+client = ApifyClient("<APIFY_TOKEN>")
+run = client.actor("extas_corp/website-to-markdown").call(run_input={"startUrls": [{"url": "https://docs.python.org/3/tutorial/index.html"}], "maxPages": 20})
+for item in client.dataset(run["defaultDatasetId"]).iterate_items():
+    print(item["title"], item["wordCount"])
+```
+
+**LangChain / RAG** (turn each result into a `Document`):
+
+```python
+from apify_client import ApifyClient
+from langchain_core.documents import Document
+
+client = ApifyClient("<APIFY_TOKEN>")
+run = client.actor("extas_corp/website-to-markdown").call(run_input={"startUrls": [{"url": "https://docs.python.org/3/tutorial/index.html"}], "maxPages": 20})
+docs = [Document(page_content=i["markdown"], metadata={"source": i.get("url")})
+        for i in client.dataset(run["defaultDatasetId"]).iterate_items() if i.get("markdown")]
+```
+
+**Make, Zapier, n8n**: add the Apify app, choose *Run Actor* (or *Run Actor and get dataset items*), set the Actor to `extas_corp/website-to-markdown` and map the JSON input. The same Actor can be started on a schedule from Apify itself, with a webhook to your own endpoint when the run finishes.
+
+## FAQ
+
+**Does it run JavaScript?** No. It fetches server-rendered HTML, which is why it is cheap. Pure single-page apps may come back empty.
+
+**Does it respect robots.txt?** Yes, including Crawl-delay. Blocked pages are returned as free `skipped` items.
+
+**Are failed pages charged?** No. Only pages converted to Markdown are charged.
+
+**Do I need to pay to try it?** New Apify accounts include free monthly platform credit (about $5 on the free plan at the time of writing), so you can run the example input above and many more items before paying anything. You only pay the per-event price listed under Pricing; runs that return nothing or fail are not charged for the failed items.

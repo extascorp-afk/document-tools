@@ -2,7 +2,7 @@
 	"$schema": "https://apify.com/schemas/v1/actor.ide.json",
 	"actorSpecification": 1,
 	"name": "google-play-reviews-scraper",
-	"title": "Google Play Reviews Scraper - Any App, Any Country",
+	"title": "Google Play Store Reviews Scraper - Any App, Any Country",
 	"description": "Get Google Play Store reviews for any Android app by name, package ID or URL. Rating, text, version, date, developer reply, any country and language. No login. Pay per review.",
 	"version": "1.0",
 	"buildTag": "latest",

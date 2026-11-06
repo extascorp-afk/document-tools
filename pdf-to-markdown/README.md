@@ -1,4 +1,4 @@
-# PDF to Markdown Converter (Tables + OCR)
+# PDF to Markdown for LLM & RAG (Tables + OCR)
 
 Convert PDF files to **clean, LLM-ready Markdown**: headings, paragraphs, Markdown tables, and OCR for scanned pages. Built for **RAG pipelines, AI agents, document search and data extraction**.
 
@@ -88,3 +88,41 @@ Found a PDF that converts badly? Open an issue on the Actor's Issues tab with th
 ## Free browser version
 
 Converting just one file? Use the free in-browser converter at [hackthehydra.com](https://hackthehydra.com): no upload, no account.
+
+## More ways to use it
+
+- **REST API without an Apify account:** the same converters are available on RapidAPI as the [Document to Markdown API](https://rapidapi.com/ExtasCorporation/api/document-to-markdown) (PDF, DOCX, PPTX, XLSX, images; free plan included).
+- **Free in your browser:** [hackthehydra.com](https://hackthehydra.com) has no-upload converters for PDF, Word, Excel, PowerPoint and images.
+
+## Use cases
+
+- **LLM and RAG**: turn papers, manuals and reports into Markdown chunks for vector stores, with headings and tables preserved.
+- **Research**: bulk-convert arXiv or publisher PDFs into searchable text for literature reviews.
+- **Operations and SEO**: extract text from supplier catalogues, whitepapers and scanned contracts (OCR).
+
+## Integrations
+
+Python (Apify client):
+
+```python
+from apify_client import ApifyClient
+
+client = ApifyClient("<APIFY_TOKEN>")
+run = client.actor("extas_corp/pdf-to-markdown").call(run_input={"pdfUrls": [{"url": "https://arxiv.org/pdf/1706.03762"}]})
+for item in client.dataset(run["defaultDatasetId"]).iterate_items():
+    print(item["markdown"][:500])
+```
+
+**LangChain / RAG** (turn each result into a `Document`):
+
+```python
+from apify_client import ApifyClient
+from langchain_core.documents import Document
+
+client = ApifyClient("<APIFY_TOKEN>")
+run = client.actor("extas_corp/pdf-to-markdown").call(run_input={"pdfUrls": [{"url": "https://arxiv.org/pdf/1706.03762"}]})
+docs = [Document(page_content=i["markdown"], metadata={"source": i.get("url")})
+        for i in client.dataset(run["defaultDatasetId"]).iterate_items() if i.get("markdown")]
+```
+
+**Make, Zapier, n8n**: add the Apify app, choose *Run Actor* (or *Run Actor and get dataset items*), set the Actor to `extas_corp/pdf-to-markdown` and map the JSON input. The same Actor can be started on a schedule from Apify itself, with a webhook to your own endpoint when the run finishes.

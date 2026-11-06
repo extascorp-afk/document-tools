@@ -1,4 +1,4 @@
-# Hacker News Scraper: Stories, Comments, Search, Jobs
+# Hacker News Scraper: Stories, Comments, Search, Who is Hiring
 
 Collect **Hacker News data** through the two official free APIs (HN Firebase API and Algolia HN Search). No login, no cookies, no browser, no proxies. Clean flat JSON.
 
@@ -53,3 +53,48 @@ Users add `karma` and `submitted_count`. In *hiring* mode each item is one posti
 | Result (story, comment, posting or profile) | $0.0003 |
 
 Data comes from public APIs. Please respect applicable privacy law when using personal data.
+
+## More tools
+
+Need to turn PDFs, Word, Excel or images into Markdown for LLMs and RAG? See the [Document to Markdown API](https://rapidapi.com/ExtasCorporation/api/document-to-markdown) on RapidAPI and the free browser tools at [hackthehydra.com](https://hackthehydra.com).
+
+## Example output
+
+```json
+{
+  "type": "comment",
+  "id": 50338732,
+  "author": "AdriaanvRossum",
+  "num_comments": 4,
+  "created_at": "2026-11-02T16:01:43.000Z",
+  "text": "Simple Analytics | DevOps Engineer | REMOTE ...",
+  "source": "hiring 2026-11"
+}
+```
+
+## Use cases
+
+- **Research**: pull all discussion of a technology or company, filtered by points and date.
+- **Recruiting and SEO**: parse every posting of the monthly Who is hiring thread.
+- **LLM datasets**: export comment trees for summarisation.
+
+## Integrations
+
+Python (Apify client):
+
+```python
+from apify_client import ApifyClient
+
+client = ApifyClient("<APIFY_TOKEN>")
+run = client.actor("extas_corp/hackernews-scraper").call(run_input={"mode": "list", "list": "top", "maxItems": 20})
+for item in client.dataset(run["defaultDatasetId"]).iterate_items():
+    print(item["type"], item.get("title"))
+```
+
+**Make, Zapier, n8n**: add the Apify app, choose *Run Actor* (or *Run Actor and get dataset items*), set the Actor to `extas_corp/hackernews-scraper` and map the JSON input. The same Actor can be started on a schedule from Apify itself, with a webhook to your own endpoint when the run finishes.
+
+## FAQ
+
+**Where does the data come from?** The official HN Firebase API and Algolia HN Search. No scraping of the website.
+
+**Do I need to pay to try it?** New Apify accounts include free monthly platform credit (about $5 on the free plan at the time of writing), so you can run the example input above and many more items before paying anything. You only pay the per-event price listed under Pricing; runs that return nothing or fail are not charged for the failed items.

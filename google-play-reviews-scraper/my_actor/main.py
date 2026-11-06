@@ -33,7 +33,10 @@ async def resolve(entry: str, lang: str, country: str) -> str:
         return m[1]
     if re.fullmatch(r'[A-Za-z][\w]*(\.[\w]+)+', entry):
         return entry
-    hits = [h for h in await retry(gp_search, entry, n_hits=8, lang=lang, country=country) if h.get('appId')]  # sponsored hits have no appId
+    raw = await retry(gp_search, entry, n_hits=8, lang=lang, country=country)
+    hits = [h for h in raw if h.get('appId')]  # the featured top hit often has no appId
+    if raw and not raw[0].get('appId'):
+        Actor.log.warning(f'"{entry}": the featured top result "{raw[0].get("title")}" has no package ID in Play search; using the best listed match. Pass the package name (com.example.app) or the Play URL for an exact app.')
     for h in hits:  # prefer an exact title match, else the top result
         if (h.get('title') or '').strip().lower() == entry.lower():
             return h['appId']
