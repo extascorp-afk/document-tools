@@ -1,0 +1,21 @@
+{
+	"$schema": "https://apify.com/schemas/v1/actor.ide.json",
+	"actorSpecification": 1,
+	"name": "website-to-markdown",
+	"title": "Website to Markdown Crawler for LLM and RAG",
+	"description": "Crawl any website and get clean Markdown per page for LLMs, RAG and AI agents. Main-content extraction, sitemap support, URL filters, honors robots.txt. No browser, cheap pay per page.",
+	"version": "1.0",
+	"buildTag": "latest",
+	"minMemoryMbytes": 128,
+	"maxMemoryMbytes": 1024,
+	"meta": {
+		"templateId": "python-start",
+		"generatedBy": "Claude Code with Claude Sonnet 5.5"
+	},
+	"inputSchema": "./input_schema.json",
+	"outputSchema": "./output_schema.json",
+	"storages": {
+		"dataset": "./dataset_schema.json"
+	},
+	"dockerfile": "../Dockerfile"
+}

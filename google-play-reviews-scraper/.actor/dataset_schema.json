@@ -1,0 +1,38 @@
+{
+    "$schema": "https://apify.com/schemas/v1/dataset.ide.json",
+    "actorSpecification": 1,
+    "fields": {
+        "type": "object",
+        "properties": {
+            "type": { "type": "string", "enum": ["review", "error"] },
+            "appId": { "type": "string" },
+            "appName": { "type": ["string", "null"] },
+            "developer": { "type": ["string", "null"] },
+            "appRating": { "type": ["number", "null"] },
+            "appRatingCount": { "type": ["integer", "null"] },
+            "installs": { "type": ["string", "null"] },
+            "country": { "type": "string" },
+            "language": { "type": "string" },
+            "reviewId": { "type": "string" },
+            "rating": { "type": "integer" },
+            "text": { "type": ["string", "null"] },
+            "version": { "type": ["string", "null"] },
+            "author": { "type": ["string", "null"] },
+            "date": { "type": ["string", "null"] },
+            "thumbsUp": { "type": ["integer", "null"] },
+            "developerReply": { "type": ["string", "null"] },
+            "developerReplyDate": { "type": ["string", "null"] },
+            "appUrl": { "type": ["string", "null"] },
+            "source": { "type": "string" },
+            "error": { "type": "string" }
+        },
+        "required": ["type"]
+    },
+    "views": {
+        "reviews": {
+            "title": "Reviews",
+            "transformation": { "fields": ["date", "country", "appName", "rating", "text", "version", "thumbsUp", "developerReply"] },
+            "display": { "component": "table" }
+        }
+    }
+}

@@ -1,0 +1,21 @@
+{
+	"$schema": "https://apify.com/schemas/v1/actor.ide.json",
+	"actorSpecification": 1,
+	"name": "google-play-reviews-scraper",
+	"title": "Google Play Reviews Scraper - Any App, Any Country",
+	"description": "Get Google Play Store reviews for any Android app by name, package ID or URL. Rating, text, version, date, developer reply, any country and language. No login. Pay per review.",
+	"version": "1.0",
+	"buildTag": "latest",
+	"minMemoryMbytes": 128,
+	"maxMemoryMbytes": 1024,
+	"meta": {
+		"templateId": "python-start",
+		"generatedBy": "Claude Code with Claude Sonnet 5.5"
+	},
+	"inputSchema": "./input_schema.json",
+	"outputSchema": "./output_schema.json",
+	"storages": {
+		"dataset": "./dataset_schema.json"
+	},
+	"dockerfile": "../Dockerfile"
+}

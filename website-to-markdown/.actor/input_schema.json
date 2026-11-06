@@ -1,0 +1,75 @@
+{
+    "title": "Website to Markdown Crawler",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "startUrls": {
+            "title": "Start URLs",
+            "type": "array",
+            "description": "Pages to convert and start crawling from.",
+            "editor": "requestListSources",
+            "prefill": [{ "url": "https://docs.python.org/3/tutorial/index.html" }]
+        },
+        "maxPages": {
+            "title": "Max pages",
+            "type": "integer",
+            "description": "Stop after this many pages were converted. You are charged per converted page.",
+            "minimum": 1,
+            "maximum": 5000,
+            "default": 20
+        },
+        "maxDepth": {
+            "title": "Max link depth",
+            "type": "integer",
+            "description": "0 = only the start URLs, 1 = also pages they link to, and so on.",
+            "minimum": 0,
+            "maximum": 10,
+            "default": 1
+        },
+        "sameHostOnly": {
+            "title": "Stay on the same host",
+            "type": "boolean",
+            "description": "Only follow links on the hosts of the start URLs.",
+            "default": true
+        },
+        "useSitemap": {
+            "title": "Seed from sitemap.xml",
+            "type": "boolean",
+            "description": "Also queue the URLs listed in the site's sitemap (found via robots.txt or /sitemap.xml). Best way to cover a whole docs site.",
+            "default": false
+        },
+        "includeUrlGlobs": {
+            "title": "Include URL patterns",
+            "type": "array",
+            "description": "Only crawl URLs matching one of these glob patterns, e.g. https://example.com/docs/*. Empty = all.",
+            "editor": "stringList"
+        },
+        "excludeUrlGlobs": {
+            "title": "Exclude URL patterns",
+            "type": "array",
+            "description": "Skip URLs matching these glob patterns, e.g. *login* or */tag/*.",
+            "editor": "stringList"
+        },
+        "keepLinks": {
+            "title": "Keep hyperlinks in Markdown",
+            "type": "boolean",
+            "description": "Turn off for plainer text, which saves tokens.",
+            "default": true
+        },
+        "saveHtml": {
+            "title": "Also save raw HTML",
+            "description": "Add the original HTML of each page to the output item.",
+            "type": "boolean",
+            "default": false
+        },
+        "delaySecs": {
+            "title": "Delay between requests to one host (seconds)",
+            "type": "number",
+            "description": "Politeness delay. A larger Crawl-delay in robots.txt wins.",
+            "minimum": 0,
+            "maximum": 30,
+            "default": 0.5
+        }
+    },
+    "required": ["startUrls"]
+}

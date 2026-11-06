@@ -1,0 +1,66 @@
+{
+    "title": "Google Play Reviews Scraper",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "apps": {
+            "title": "Apps",
+            "type": "array",
+            "description": "Google Play URLs (play.google.com/store/apps/details?id=com.duolingo), package names (com.duolingo) or app names (Duolingo). Names resolve to the best match of Google Play search.",
+            "editor": "stringList",
+            "prefill": ["com.duolingo"]
+        },
+        "countries": {
+            "title": "Countries",
+            "type": "array",
+            "description": "Two-letter Play Store country codes, e.g. us, gb, de, fr, in, br. Reviews are per storefront, so add several to cover more.",
+            "editor": "stringList",
+            "prefill": ["us"]
+        },
+        "language": {
+            "title": "Language",
+            "type": "string",
+            "description": "Review language code (en, de, fr, es, pt, ja, ...).",
+            "editor": "textfield",
+            "default": "en"
+        },
+        "sort": {
+            "title": "Sort",
+            "type": "string",
+            "description": "Newest first, most relevant (Google's ranking) or by rating.",
+            "editor": "select",
+            "enum": ["newest", "relevant", "rating"],
+            "enumTitles": ["Newest first", "Most relevant", "Rating"],
+            "default": "newest"
+        },
+        "maxReviews": {
+            "title": "Max reviews per app and country",
+            "type": "integer",
+            "description": "You are charged per review delivered.",
+            "minimum": 1,
+            "maximum": 5000,
+            "default": 50
+        },
+        "minRating": {
+            "title": "Minimum rating",
+            "type": "integer",
+            "description": "Keep only reviews with at least this many stars (1-5).",
+            "minimum": 1,
+            "maximum": 5
+        },
+        "maxRating": {
+            "title": "Maximum rating",
+            "type": "integer",
+            "description": "Keep only reviews with at most this many stars. Use 1-2 to find complaints.",
+            "minimum": 1,
+            "maximum": 5
+        },
+        "since": {
+            "title": "Since",
+            "type": "string",
+            "description": "Only reviews on or after this date, e.g. 2026-01-31. With newest-first sorting the scan stops as soon as older reviews appear.",
+            "editor": "textfield"
+        }
+    },
+    "required": ["apps"]
+}

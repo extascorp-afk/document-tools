@@ -1,0 +1,31 @@
+{
+    "$schema": "https://apify.com/schemas/v1/dataset.ide.json",
+    "actorSpecification": 1,
+    "fields": {
+        "type": "object",
+        "properties": {
+            "type": { "type": "string", "enum": ["page", "skipped", "error"] },
+            "url": { "type": "string" },
+            "finalUrl": { "type": "string" },
+            "depth": { "type": "integer" },
+            "title": { "type": ["string", "null"] },
+            "description": { "type": ["string", "null"] },
+            "author": { "type": ["string", "null"] },
+            "date": { "type": ["string", "null"] },
+            "language": { "type": ["string", "null"] },
+            "markdown": { "type": "string" },
+            "wordCount": { "type": "integer" },
+            "html": { "type": "string" },
+            "reason": { "type": "string" },
+            "error": { "type": "string" }
+        },
+        "required": ["type", "url"]
+    },
+    "views": {
+        "pages": {
+            "title": "Pages",
+            "transformation": { "fields": ["url", "title", "wordCount", "markdown"] },
+            "display": { "component": "table" }
+        }
+    }
+}
