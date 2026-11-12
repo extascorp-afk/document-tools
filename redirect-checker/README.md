@@ -10,7 +10,7 @@ No login, no browser, no proxies: plain HTTP requests, headers only (page bodies
 - DNS, TLS and timeout errors are reported per URL, they never stop the run
 - One `ok` column to filter on: final status < 400, no loop, and expected target matched (if given)
 - Parallel checks (up to 50 at once), custom User-Agent to test bot-specific redirects
-- **Pay per URL checked**, see the Pricing tab.
+- **Free during launch**: no per-URL fee at the moment, you only pay Apify platform usage (covered by the Free plan's monthly credit for normal use).
 
 ## Input examples
 

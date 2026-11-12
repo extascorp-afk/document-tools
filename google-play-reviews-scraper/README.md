@@ -38,6 +38,8 @@ curl -X POST "https://api.apify.com/v2/acts/extas_corp~google-play-reviews-scrap
 
 ## Pricing
 
+**Free during launch:** this Actor currently has no per-result fee. You only pay Apify platform usage, which the Free plan's monthly credit covers for normal use. The prices below are the regular prices and are not charged at the moment.
+
 | Event | Price |
 | --- | --- |
 | Review | $0.0004 |

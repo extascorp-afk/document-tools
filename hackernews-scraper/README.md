@@ -48,6 +48,8 @@ Users add `karma` and `submitted_count`. In *hiring* mode each item is one posti
 
 ## Pricing
 
+**Free during launch:** this Actor currently has no per-result fee. You only pay Apify platform usage, which the Free plan's monthly credit covers for normal use. The prices below are the regular prices and are not charged at the moment.
+
 | Event | Price |
 | --- | --- |
 | Result (story, comment, posting or profile) | $0.0003 |
