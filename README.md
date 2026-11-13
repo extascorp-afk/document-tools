@@ -23,6 +23,7 @@ Try the converters free in your browser at **[hackthehydra.com](https://hacktheh
 | [`bluesky-scraper`](bluesky-scraper) | Bluesky posts and profiles via the public API | [apify.com/extas_corp/bluesky-scraper](https://apify.com/extas_corp/bluesky-scraper) |
 | [`wayback-machine-scraper`](wayback-machine-scraper) | Wayback Machine snapshots / archived URL list for a domain | [apify.com/extas_corp/wayback-machine-scraper](https://apify.com/extas_corp/wayback-machine-scraper) |
 | [`redirect-checker`](redirect-checker) | Follow every redirect hop of a list of URLs and report the chain and final status | [apify.com/extas_corp/redirect-checker](https://apify.com/extas_corp/redirect-checker) |
+| [`ssl-certificate-checker`](ssl-certificate-checker) | Check SSL/TLS certificates in bulk: expiry date, issuer, alternative names, trust and hostname errors | [apify.com/extas_corp/ssl-certificate-checker](https://apify.com/extas_corp/ssl-certificate-checker) |
 
 Each folder holds the documentation of one tool: inputs, output fields, examples and FAQ.
 
