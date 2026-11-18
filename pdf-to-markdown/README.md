@@ -6,6 +6,7 @@ Convert PDF files to **clean, LLM-ready Markdown**: headings, paragraphs, Markdo
 - **Headings detected** from font sizes (`#`, `##`, `###`), paragraphs re-joined, hyphenated words fixed
 - **Tables** converted to real Markdown tables (layout boxes are ignored)
 - **Scanned PDFs**: pages without a text layer are OCR'd with Tesseract (English, French, German, Spanish, Italian, Portuguese, Dutch)
+- **Broken fonts**: pages whose text layer is mostly `(cid:123)` glyph codes (fonts with no Unicode map) are OCR'd too, instead of returning garbage
 - **Bulk**: give hundreds of URLs, they're processed in parallel
 - **Fair pricing**: you pay only for PDFs that convert successfully. Failed downloads cost nothing.
 
