@@ -26,6 +26,7 @@ Try the converters free in your browser at **[hackthehydra.com](https://hacktheh
 | [`ssl-certificate-checker`](ssl-certificate-checker) | Check SSL/TLS certificates in bulk: expiry date, issuer, alternative names, trust and hostname errors | [apify.com/extas_corp/ssl-certificate-checker](https://apify.com/extas_corp/ssl-certificate-checker) |
 | [`email-auth-checker`](email-auth-checker) | Audit SPF, DKIM, DMARC, MTA-STS, TLS-RPT and BIMI of many domains from public DNS: score, grade and issues | [apify.com/extas_corp/email-auth-checker](https://apify.com/extas_corp/email-auth-checker) |
 | [`domain-availability-checker`](domain-availability-checker) | Check domains in bulk through official RDAP: available or registered, expiry date and days left, registrar, status, nameservers | [apify.com/extas_corp/domain-availability-checker](https://apify.com/extas_corp/domain-availability-checker) |
+| [`security-headers-checker`](security-headers-checker) | Grade HTTP security headers (HSTS, CSP, clickjacking, cookies, version leaks) A to F and check security.txt, in bulk | [apify.com/extas_corp/security-headers-checker](https://apify.com/extas_corp/security-headers-checker) |
 
 Each folder holds the documentation of one tool: inputs, output fields, examples and FAQ.
 
